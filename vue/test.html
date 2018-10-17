@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">{{ again }}<span v-text="again"></span></div>
+<script src="dist/hfm.js"></script>
+<script>
+    window.data = {
+        again : 123,
+        amnhh : 12345
+    }
+    new Hfm({
+        data : window.data,
+        el : '#app'
+    })
+</script>
+</body>
+</html>
