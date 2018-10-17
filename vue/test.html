@@ -5,17 +5,21 @@
     <title>Title</title>
 </head>
 <body>
-<div id="app">{{ again }}<span v-text="again"></span></div>
+<div id="app">{{ again }}<span v-text="amnhh" class="test-class"></span></div>
 <script src="dist/hfm.js"></script>
 <script>
     window.data = {
-        again : 123,
-        amnhh : 12345
+        again : '我是 {{ again }} 的绑定结果',
+        amnhh : '我是 v-text 的绑定结果'
     }
     new Hfm({
         data : window.data,
         el : '#app'
     })
+    setTimeout(() => {
+        window.data.amnhh = ' v-text 依赖源变更'
+        window.data.again = '{{ again }}依赖源变更'
+    }, 3000)
 </script>
 </body>
 </html>

@@ -45,12 +45,36 @@ proto.initResolve = function () {
                         .replace('}}', '')
                         .replace(/\s/g, '')
                 )
+            } else if (Utils.isElementNode(node)) {
+                this.resolveElementNode(node)
             }
         })
 }
 
+/**
+ * 解析文本节点
+ * @param node
+ * @param propertyName
+ */
 proto.resolveTextNode = function (node, propertyName) {
     resolveUtil.text(node, propertyName, this.vm)
+}
+
+/**
+ * 解析 element 节点
+ * @param node
+ */
+proto.resolveElementNode = function (node) {
+    let attributes = [].slice.call(node.attributes)
+    const DIRECTIVE_REG = /^v-/
+    attributes.map(attribute => {
+        let name = attribute.name
+        // 说明是内置指令
+        if (DIRECTIVE_REG.test(name)) {
+            let directiveName = name.replace(/^v-/, '')
+            this[`resolve${directiveName[0].toUpperCase() + directiveName.slice(1)}Node`](node, attribute.value)
+        }
+    })
 }
 
 export default DomResolve

@@ -316,12 +316,38 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var BRACKET_REG = /\{\{(.*)\}\}/;[].slice.call(childs).map(function (node) {
 	        if (_utils2['default'].isTextNode(node) && BRACKET_REG.test(node.textContent)) {
 	            _this.resolveTextNode(node, node.textContent.replace('{{', '').replace('}}', '').replace(/\s/g, ''));
+	        } else if (_utils2['default'].isElementNode(node)) {
+	            _this.resolveElementNode(node);
 	        }
 	    });
 	};
 	
+	/**
+	 * 解析文本节点
+	 * @param node
+	 * @param propertyName
+	 */
 	proto.resolveTextNode = function (node, propertyName) {
 	    _resolveUtil2['default'].text(node, propertyName, this.vm);
+	};
+	
+	/**
+	 * 解析 element 节点
+	 * @param node
+	 */
+	proto.resolveElementNode = function (node) {
+	    var _this2 = this;
+	
+	    var attributes = [].slice.call(node.attributes);
+	    var DIRECTIVE_REG = /^v-/;
+	    attributes.map(function (attribute) {
+	        var name = attribute.name;
+	        // 说明是内置指令
+	        if (DIRECTIVE_REG.test(name)) {
+	            var directiveName = name.replace(/^v-/, '');
+	            _this2['resolve' + (directiveName[0].toUpperCase() + directiveName.slice(1)) + 'Node'](node, attribute.value);
+	        }
+	    });
 	};
 	
 	exports['default'] = DomResolve;
