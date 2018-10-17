@@ -73,6 +73,8 @@ proto.resolveElementNode = function (node) {
         if (DIRECTIVE_REG.test(name)) {
             let directiveName = name.replace(/^v-/, '')
             this[`resolve${directiveName[0].toUpperCase() + directiveName.slice(1)}Node`](node, attribute.value)
+            // 删除指令对应的 dom attribute
+            node.removeAttribute(name)
         }
     })
 }

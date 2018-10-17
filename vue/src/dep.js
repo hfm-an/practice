@@ -4,11 +4,7 @@
  * @Email : amnhhlod@163.com
  * @Description :
  */
-let id = 1
-
 function Dep () {
-    // 每个 Dep 的唯一标识
-    this.id = id ++
     // 依赖列表
     this.subs = []
 }
@@ -16,7 +12,7 @@ function Dep () {
 const proto = Dep.prototype
 
 proto.depend = function () {
-    Dep.target.addDep(this)
+    this.addSub(Dep.target)
 }
 
 proto.addSub = function (watcher) {
