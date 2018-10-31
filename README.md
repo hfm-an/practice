@@ -5,4 +5,4 @@
 ### 目录
 
 - `vue`  ：简易实现了 vue 的双向绑定，实现了 v-text 命令
-- `lodash` : 自己实现一遍 lodash 的 api, 争取全实现完吧
+- `bundler` : 简易模块打包器
