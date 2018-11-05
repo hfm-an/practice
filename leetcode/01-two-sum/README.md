@@ -130,6 +130,32 @@ function twoSum (nums, target) {
 
 这样还是会出现问题，就是说如果入参数组中存在两个相同的值，则会出现问题，类似入参为 `([3, 3], 6)` 会输出 `[1, 1]`
 
+简单修改下，第二遍遍历的时候，只要再判断下是否与自身相等就好了
+
+```js
+function twoSum (nums, target) {
+    const len = nums.length;
+    let ret = []
+    let hashMap = {}
+
+    for (let i = 0; i < len; i ++) {
+        hashMap[nums[i]] = i
+    }
+
+
+    for (let i = 0; i < len; i ++) {
+        let secondVal = hashMap[target - nums[i]]
+        if (secondVal !== undefined && secondVal !== i) {
+            ret = [i, secondVal]
+        }
+    }
+
+    return ret
+}
+```
+
+这时候感觉这条路也已经走到了极致，那我们需要想下是否有一条更简单的路？有的，那就是一次遍历，解决 `hashMap` 建立索引 + 寻值
+
 简单修改下，因为至多只会出现两个数字之和等于 `target`, 而且这两个数字值可能是相同的，我们又需要一个 `hashMap` 去将 `O(n^2)` 降为 `O(n)`, 所以一定不能先遍历一次数组去建立 `hashMap`
 
 比如入参是 `([3, 3], 6)` 的时候，我们需要捕捉到第一个 `3` 进入 `hashMap`, 第二个 `3` 未进入 `hashMap` 的那个时机去判断是否命中，命中则输出，不命中则继续，因为二者相等，所以其实覆盖掉也没什么关系，因为有且只有一组解，所以如果不命中则两个数字肯定都不是最终的结果。。。

@@ -8,19 +8,19 @@
 
 function twoSum (nums, target) {
     const len = nums.length;
+    let ret = []
     let hashMap = {}
 
     for (let i = 0; i < len; i ++) {
-        // 检验是否已经存在了缺失的第二个数字
-        let secondVal = hashMap[target - nums[i]]
-
-        // 如果第二个数字存在，则命中，直接返回
-        if (secondVal !== undefined) {
-            return [secondVal, i]
-        }
-
-        // 否则就记录下现有的这个数字
         hashMap[nums[i]] = i
+    }
+
+
+    for (let i = 0; i < len; i ++) {
+        let secondVal = hashMap[target - nums[i]]
+        if (secondVal !== undefined && secondVal !== i) {
+            ret = [i, secondVal]
+        }
     }
 
     return ret
