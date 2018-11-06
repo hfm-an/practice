@@ -140,3 +140,5 @@ function reverseInteger (x) {
     return ret
 }
 ```
+
+执行的速度，还是很看 leetcode 的心情的感觉。。
