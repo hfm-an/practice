@@ -48,7 +48,7 @@ var reverseList = function(head) {
  * 这里需要注意的是，都必须是副本，不然你在给第一个元素的 next 值赋值给 null 的时候
  * 就已经丢失了对链表从第二个元素开始的所有的引用，后半截链表就成了内存的碎片了
  * 
- * 最快可以到达 76ms，击败了87.99%
+ * 最快可以到达 76ms，击败了87.99%的用户
  */
 var reverseList = function(head) {
     if (head === null) return []
