@@ -6,3 +6,5 @@
 
 - `vue`  ：简易实现了 vue 的双向绑定，实现了 v-text 命令
 - `bundler` : 简易模块打包器
+- `leetcode` : 一些 leetcode 上的问题的解答
+- `geek-bang` : 极客科技上的一些课程的自己的解答与练习
